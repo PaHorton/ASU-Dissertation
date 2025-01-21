@@ -45,28 +45,30 @@
 % Title page, input
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \listadd{\titlelines}%
-  {First Line of the Title}             %<Enter the title of the dissertation
+  {Development, Implementation, and Impacts of}             %<Enter the title of the dissertation
 \listadd{\titlelines}%
-  {Second Line of the Title}            % If you want to
+  {Novelty Detection Systems for Mission Operations}            % If you want to
                                         %   split the title across lines,
                                         %   use another \listadd command for the
                                         %   second line
-\newcommand*\Author{Your Name}          %<Enter your name; must match official transcript
+\newcommand*\Author{Paul Alexander Horton}          %<Enter your name; must match official transcript
 \newcommand*{\documentname}%
   {Dissertation}                        %<Enter the type of document (capitalized)
 \newcommand*{\degreename}
   {Doctor of Philosophy}                %<Enter the type of degree (capitalized)
-\newcommand*\defdate{Month Year}        %<Give month (written out fully) and year of
+\newcommand*\defdate{June 2024}        %<Give month (written out fully) and year of
                                         %   the oral defense
-\listadd{\committeechair}{Chair Name}   %<Enter committee chair name; use \listadd for
-%\listadd{\committeechair}{Another name}%   for additional names
-\newcommand*{\chairlabel}{Chair}        %<If you have co-chairs, replace this text with
+\listadd{\committeechair}{Chris Groppi}   %<Enter committee chair name; use \listadd for
+\listadd{\committeechair}{Jim Bell}%   for additional names
+\newcommand*{\chairlabel}{Co-Chair}        %<If you have co-chairs, replace this text with
                                         %   'Co-Chair'
-\listadd{\committeemember}{Member Name} %<Enter committee member names; use \listadd for
-\listadd{\committeemember}{Member Name} %   additional names
-\newcommand*{\gradmonth}{Month}         %<Enter the graduation date; month can only be:
+\listadd{\committeemember}{Hannah Kerner} %<Enter committee member names; use \listadd for
+\listadd{\committeemember}{Philip Mauskopf} %   additional names
+\listadd{\committeemember}{Nargess Memarsadeghi} %   additional names
+
+\newcommand*{\gradmonth}{August}         %<Enter the graduation date; month can only be:
                                         %  May, August, or December
-\newcommand*{\gradyear}{Year}           %<Enter the graduation year, e.g. 2014
+\newcommand*{\gradyear}{2024}           %<Enter the graduation year, e.g. 2014
 
 \listadd{\keywords}{keyword 1}          %<Enter keywords; use \listadd for
 \listadd{\keywords}{keyword 2}          %   additional names (up to 6)
@@ -140,23 +142,23 @@
   %
   % Sometimes something simple like the following will work:
   %
-  %   \setmainfont{Garamond}
+  % \setmainfont{Times12}
   %
   % But often the easiest solution is to move font files (*.otf or *.ttf) into
   % a sub-directory and provide the direct path to them here.
   %
   % See `fontspec` documentation for more on using local font files.
   %
-  \setmainfont{EBGaramond12}[           %<Set the main font; make sure the font is correct
-                                        %   for the font size (See ASU Style Guide)
-    Path          = /usr/share/fonts/opentype/ebgaramond/,
-    Extension     = .otf ,
-    UprightFont   = *-Regular ,
-    ItalicFont    = *-Italic ,
-    % Notice that bold is missing here because the Docker image does not have
-    % a bold typeface for Garamond; it would probably be possible to find
-    % one on your local system or online.
-  ]
+  % \setmainfont{EBGaramond12}[           %<Set the main font; make sure the font is correct
+  %                                       %   for the font size (See ASU Style Guide)
+  %   Path          = /usr/share/fonts/opentype/ebgaramond/,
+  %   Extension     = .otf ,
+  %   UprightFont   = *-Regular ,
+  %   ItalicFont    = *-Italic ,
+  %   % Notice that bold is missing here because the Docker image does not have
+  %   % a bold typeface for Garamond; it would probably be possible to find
+  %   % one on your local system or online.
+  % ]
 
 %  \setmathfont(Digits,Latin,Greek)%     %~Uncomment two lines to set a font for math%
 %    {MATHFONT}
@@ -776,7 +778,7 @@
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\bibfilename}{%             %<Enter the name of the *.bib file containing the
-  src/sample/library%                   %   reference information for sources cited in
+  dis.bib%                   %   reference information for sources cited in
 }%                                      %   the text. God help you if you're doing
                                         %   citations manually.
 
@@ -1135,7 +1137,7 @@
 \phantomsection                         % \phantomsection is needed before using
                                         %   \addtocontents when it contains certain macros
                                         %   when also using 'hyperref' package
-\addtocontents{toc}%                    % Undo manual override above for chapter indent,
+\addtocontents{toc}%          -          % Undo manual override above for chapter indent,
   {\setlength{\cftchapterindent}%       %   so actual chapters in the TOC are indented
     {\levelindentincrement}%            %   correctly
   }
@@ -1163,8 +1165,9 @@
 % Body
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
-%\include{chapter1}                     %<Insert your chapters here; I recommend to use
-%\include{chapter2}                     %   \include rather than \input for chapters
+% \include{src/sample/chapter}                     %<Insert your chapters here; I recommend to use
+\include{src/sections/chapter2}                     %   \include rather than \input for chapters
+\include{src/sections/chapter}
 %\include{chapter3}% etc.
                                         % Heading commands (in descending order):
                                         % \chapter
@@ -1263,7 +1266,7 @@
                                         %   lines down and checking the output until
                                         %   the TOC headers appear correctly
 
-%\input{appendix1}                       %~Insert your appendices here; I recommend to use
+\input{src/sample/appendix}                       %~Insert your appendices here; I recommend to use
 %\input{appendix2}                       %   \input rather than \include for appendices.
 %\input{appendix3}% etc.                 %   All heading commands are the same as above,
                                          %   e.g., \chapter, \section, etc.
