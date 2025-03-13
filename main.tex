@@ -41,6 +41,8 @@
 \usepackage{calc}					              % Calculate text widths; used in page layout
                                         %   changes
 \usepackage{multirow,array}             % Adds multi row tables
+\usepackage{algorithm}                  % For writing algorithms
+\usepackage{algpseudocode}              % For writing algorithms
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page, input
@@ -57,7 +59,7 @@
   {Dissertation}                        %<Enter the type of document (capitalized)
 \newcommand*{\degreename}
   {Doctor of Philosophy}                %<Enter the type of degree (capitalized)
-\newcommand*\defdate{June 2024}        %<Give month (written out fully) and year of
+\newcommand*\defdate{May 2025}        %<Give month (written out fully) and year of
                                         %   the oral defense
 \listadd{\committeechair}{Chris Groppi}   %<Enter committee chair name; use \listadd for
 \listadd{\committeechair}{Jim Bell}%   for additional names
@@ -69,7 +71,7 @@
 
 \newcommand*{\gradmonth}{August}         %<Enter the graduation date; month can only be:
                                         %  May, August, or December
-\newcommand*{\gradyear}{2024}           %<Enter the graduation year, e.g. 2014
+\newcommand*{\gradyear}{2025}           %<Enter the graduation year, e.g. 2014
 
 \listadd{\keywords}{keyword 1}          %<Enter keywords; use \listadd for
 \listadd{\keywords}{keyword 2}          %   additional names (up to 6)
@@ -780,7 +782,7 @@
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\bibfilename}{%             %<Enter the name of the *.bib file containing the
-  dis.bib%                   %   reference information for sources cited in
+  main.bib%                   %   reference information for sources cited in
 }%                                      %   the text. God help you if you're doing
                                         %   citations manually.
 
@@ -789,7 +791,7 @@
 
 \providetoggle{usebiblatex}             % True = a biblatex package is being used;
                                         %   False = 'natbib' is being used
-\settoggle{usebiblatex}{true}           %~Set to 'false' to use 'natbib' intead of
+\settoggle{usebiblatex}{false}           %~Set to 'false' to use 'natbib' intead of
                                         %   biblatex; I strongly recommend using biblatex
                                         %   because natbib is rather old and will break
                                         %   for innocuous things like underscores in URLs
@@ -797,7 +799,7 @@
 %                                       % Settings for 'biblatex' or a version of
 %                                       %   'biblatex'
   \usepackage[authordate,%
-              backend=biber,%           % Recommend to use 'biber' instead of 'bibtex'
+              backend=bibtex,%           % Recommend to use 'biber' instead of 'bibtex'
               doi=only,%                % Avoid printing URLs
               isbn=false]%              % Don't print ISBN numbers
               {biblatex-chicago}        %~Other possibilities include: 'biblatex',
@@ -954,7 +956,7 @@
  %pdfproducer={},                       % Let 'pdfproducer' be filled automatically
   pdfsubject={\pdfsummary},             % Subject of the document
   pdfkeywords=\thepdfkeywordsstring,    % List of keywords
-  hidelinks={true},                     % Links look like regular text (no colors, boxes)
+  hidelinks,                            % Links look like regular text (no colors, boxes)
   breaklinks={true},                    % Allow links to break across lines
 }
 \ifxetex                                % If processing with XeTeX
@@ -1084,7 +1086,7 @@
 \frontmatter
 
 \chapter*{Abstract}                     % Abstract is required
-\input{src/sample/abstract}             %<Enter the name of the .tex file containing your
+\input{src/sections/abstract}             %<Enter the name of the .tex file containing your
                                         %   your abstract or omit this line and type in
                                         %   your abstract here.
 
@@ -1092,12 +1094,12 @@
 %\clearpage                             %~If you don't wish to display the heading
                                         %   'Dedication', comment out the previous line
                                         %   and use this one instead.
-\input{src/sample/dedication}           %<Enter the name of the .tex file containing your
+\input{src/sections/dedication}           %<Enter the name of the .tex file containing your
                                         %   your dedication or omit this line and type in
                                         %   your dedication here.
 
 \chapter*{Acknowledgments}              %~Acknowledgments are optional
-\input{src/sample/acknowledgments}      %<Enter the name of the .tex file containing your
+\input{src/sections/acknowledgments}      %<Enter the name of the .tex file containing your
                                         %   acknowledgments or omit this line and type in
                                         %   your acknowledgments here.
 
@@ -1167,9 +1169,11 @@
 % Body
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
-% \include{src/sample/chapter}                     %<Insert your chapters here; I recommend to use
-% \include{src/sections/chapter2}                     %   \include rather than \input for chapters
-\include{src/sections/chapter3}
+\include{src/chapters/chapter1}
+\include{src/chapters/chapter2}                     %   \include rather than \input for chapters
+\include{src/chapters/chapter3}
+\include{src/chapters/chapter4}
+\include{src/chapters/chapter5}
 %\include{chapter3}% etc.
                                         % Heading commands (in descending order):
                                         % \chapter
@@ -1268,7 +1272,7 @@
                                         %   lines down and checking the output until
                                         %   the TOC headers appear correctly
 
-\input{src/sample/appendix}                       %~Insert your appendices here; I recommend to use
+\input{src/sections/appendix}                       %~Insert your appendices here; I recommend to use
 %\input{appendix2}                       %   \input rather than \include for appendices.
 %\input{appendix3}% etc.                 %   All heading commands are the same as above,
                                          %   e.g., \chapter, \section, etc.
