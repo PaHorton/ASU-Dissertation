@@ -27,9 +27,7 @@
 \usepackage{graphicx}                   % For importing image files
 \usepackage{etoolbox}                   % For advanced commands throughout preamble
 \usepackage{microtype}                  %~Improves kerning and protrusion (optional);
-                                        %   See here for an introduction:
-                                        %   http://www.khirevich.com/latex/microtype/
-
+\usepackage{lscape}
 \providetoggle{usemicrotype}            % TRUE = microtype is being used
 \makeatletter                           %   (Used to turn of microtype protrusion in the
 \@ifpackageloaded{microtype}%           %   table of contents.)
@@ -43,6 +41,8 @@
 \usepackage{multirow,array}             % Adds multi row tables
 \usepackage{algorithm}                  % For writing algorithms
 \usepackage{algpseudocode}              % For writing algorithms
+\usepackage{siunitx}                    % For writing units and numbers with units
+\usepackage{subcaption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page, input
@@ -59,7 +59,7 @@
   {Dissertation}                        %<Enter the type of document (capitalized)
 \newcommand*{\degreename}
   {Doctor of Philosophy}                %<Enter the type of degree (capitalized)
-\newcommand*\defdate{May 2025}        %<Give month (written out fully) and year of
+\newcommand*\defdate{June 2025}        %<Give month (written out fully) and year of
                                         %   the oral defense
 \listadd{\committeechair}{Chris Groppi}   %<Enter committee chair name; use \listadd for
 \listadd{\committeechair}{Jim Bell}%   for additional names
@@ -116,7 +116,7 @@
                                         %     http://www.ams.org/publications/authors/tex/amslatex
                                         % ('mathtools' loads and extends 'amsmath')
 \usepackage{ifxetex,ifluatex}           % Can check if XeTeX or LuaTeX was used to typeset
-\usepackage{fixltx2e}                   % Provides \textsubscript
+% \usepackage{fixltx2e}                   % Provides \textsubscript
 \IfFileExists{upquote.sty}%             % Use upquote if available, for
   {\usepackage{upquote}}{}              %   straight quotes in verbatim environments
 
@@ -760,9 +760,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{chngcntr}                   % Modify counters (e.g., for figures, footnotes)
 \counterwithout*{footnote}{chapter}     % Make footnote numbering continuous throughout
+\footmarkstyle{#1.\,}
 
 \providetoggle{useendnotes}
-\settoggle{useendnotes}{true}           %<Set to 'true' if you want to use endnotes
+\settoggle{useendnotes}{false}           %<Set to 'true' if you want to use endnotes
 \iftoggle{useendnotes}{%                % Use the command \pagenote to create endnotes
                                         %   in the running text. They will be collected
                                         %   and printed in a 'Notes' section at the end
@@ -791,7 +792,7 @@
 
 \providetoggle{usebiblatex}             % True = a biblatex package is being used;
                                         %   False = 'natbib' is being used
-\settoggle{usebiblatex}{false}           %~Set to 'false' to use 'natbib' intead of
+\settoggle{usebiblatex}{true}           %~Set to 'false' to use 'natbib' intead of
                                         %   biblatex; I strongly recommend using biblatex
                                         %   because natbib is rather old and will break
                                         %   for innocuous things like underscores in URLs
@@ -799,9 +800,10 @@
 %                                       % Settings for 'biblatex' or a version of
 %                                       %   'biblatex'
   \usepackage[authordate,%
-              backend=bibtex,%           % Recommend to use 'biber' instead of 'bibtex'
+              backend=biber,%           % Recommend to use 'biber' instead of 'bibtex'
               doi=only,%                % Avoid printing URLs
-              isbn=false]%              % Don't print ISBN numbers
+              isbn=false,%              % Don't print ISBN numbers
+              refsegment=chapter]
               {biblatex-chicago}        %~Other possibilities include: 'biblatex',
                                         %   'biblatex-apa', and 'biblatex-mla'
   \bibliography{\bibfilename}
@@ -1075,7 +1077,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Copyright page
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\copyrightpageASU                       %~If you don't want to have a copyright page,
+% \copyrightpageASU                       %~If you don't want to have a copyright page,
                                         %   comment out this line
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1169,12 +1171,22 @@
 % Body
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
-\include{src/chapters/chapter1}
-\include{src/chapters/chapter2}                     %   \include rather than \input for chapters
-\include{src/chapters/chapter3}
-\include{src/chapters/chapter4}
-\include{src/chapters/chapter5}
-%\include{chapter3}% etc.
+\include{src/chapters/introduction}
+\include{src/chapters/chapter_msl}
+\SingleSpacing
+\printbibliography[segment=\therefsegment, heading=subbibnumbered]
+\DoubleSpacing
+\include{src/chapters/chapter_rst}
+\SingleSpacing
+\printbibliography[segment=\therefsegment, heading=subbibnumbered]
+\DoubleSpacing
+\include{src/chapters/chapter_spectra}
+\SingleSpacing
+\printbibliography[segment=\therefsegment, heading=subbibnumbered]
+\DoubleSpacing
+\include{src/chapters/chapter_carina}
+\include{src/chapters/chapter_readout}
+\include{src/chapters/conclusion}
                                         % Heading commands (in descending order):
                                         % \chapter
                                         % \section
